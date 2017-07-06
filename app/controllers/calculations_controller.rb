@@ -49,7 +49,9 @@ class CalculationsController < ApplicationController
 
     render("loan_payment.html.erb")
   end
-
+  
+  
+  
   def time_between
     @starting = Chronic.parse(params[:starting_time])
     @ending = Chronic.parse(params[:ending_time])
@@ -63,12 +65,12 @@ class CalculationsController < ApplicationController
     #   number of seconds as a result.
     # ================================================================================
 
-    @seconds = "Replace this string with your answer."
-    @minutes = "Replace this string with your answer."
-    @hours = "Replace this string with your answer."
-    @days = "Replace this string with your answer."
-    @weeks = "Replace this string with your answer."
-    @years = "Replace this string with your answer."
+    @seconds = @ending - @starting
+    @minutes = @seconds % 60
+    @hours = @minutes % 60
+    @days =  @hours % 24
+    @weeks = @days % 7
+    @years = @weeks % 52
 
     # ================================================================================
     # Your code goes above.
@@ -85,27 +87,27 @@ class CalculationsController < ApplicationController
     # The numbers the user input are in the array @numbers.
     # ================================================================================
 
-    @sorted_numbers = "Replace this string with your answer."
+    @sorted_numbers = @numbers.sort
 
-    @count = "Replace this string with your answer."
+    @count = @numbers.count
 
-    @minimum = "Replace this string with your answer."
+    @minimum = @numbers[0]
 
-    @maximum = "Replace this string with your answer."
+    @maximum = @numbers[@count -1]
 
-    @range = "Replace this string with your answer."
+    @range = @maximum - @minimum
 
-    @median = "Replace this string with your answer."
+    @median =@numbers[@count/2]
 
-    @sum = "Replace this string with your answer."
+    @sum = @numbers.sum
 
-    @mean = "Replace this string with your answer."
+    @mean = @sum/@count
 
-    @variance = "Replace this string with your answer."
+    @variance = (@numbers- @mean)**2
 
-    @standard_deviation = "Replace this string with your answer."
+    @standard_deviation = @numbers.standard_deviation
 
-    @mode = "Replace this string with your answer."
+    @mode = @numbers.mode
 
     # ================================================================================
     # Your code goes above.
