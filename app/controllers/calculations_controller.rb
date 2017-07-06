@@ -66,11 +66,11 @@ class CalculationsController < ApplicationController
     # ================================================================================
 
     @seconds = @ending - @starting
-    @minutes = @seconds % 60
-    @hours = @minutes % 60
-    @days =  @hours % 24
-    @weeks = @days % 7
-    @years = @weeks % 52
+    @minutes = @seconds / 60
+    @hours = @minutes / 60
+    @days =  @hours / 24
+    @weeks = @days / 7
+    @years = @weeks / 52
 
     # ================================================================================
     # Your code goes above.
@@ -93,7 +93,7 @@ class CalculationsController < ApplicationController
 
     @minimum = @numbers[0]
 
-    @maximum = @numbers[@count -1]
+    @maximum = @sorted_numbers[@count - 1]
 
     @range = @maximum - @minimum
 
@@ -103,11 +103,17 @@ class CalculationsController < ApplicationController
 
     @mean = @sum/@count
 
-    @variance = (@numbers- @mean)**2
+    @demeaned = @numbers.map { |i| i - @mean }
+    @squared = @demeaned.map { |i| i**2}
+    @variance = @squared.sum
+    
 
-    @standard_deviation = @numbers.standard_deviation
+    @standard_deviation = Math.sqrt(@variance)
 
-    @mode = @numbers.mode
+    @counts = @numbers.map { |i| @numbers.count(i)}
+    
+   
+    @mode = @numbers[@counts.index(@counts.sort[@counts.count - 1])]
 
     # ================================================================================
     # Your code goes above.
