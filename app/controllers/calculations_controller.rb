@@ -108,7 +108,7 @@ class CalculationsController < ApplicationController
     @median = 0
     
     if (@count % 2 == 0)  
-      @median = (@numbers[@count/2] +@numbers[@count/2 + 1])/2
+      @median = (@numbers[@count/2] + @numbers[@count/2 - 1]) / 2
     else   
       @median = @numbers[@count/2]
     end
