@@ -41,11 +41,13 @@ class CalculationsController < ApplicationController
     # ================================================================================
 
     total = @principal * (1+@apr/100)**@years
+
     r =  @apr/100/12
     
     num = r * @principal 
     den = 1 - (1 + r)**(- @years*12) 
     @monthly_payment = num / den
+
 
     # ================================================================================
     # Your code goes above.
@@ -70,11 +72,13 @@ class CalculationsController < ApplicationController
     # ================================================================================
 
     @seconds = @ending - @starting
+
     @minutes = @seconds / 60
     @hours = @minutes / 60
     @days =  @hours / 24
     @weeks = @days / 7
     @years = @weeks / 52
+
 
     # ================================================================================
     # Your code goes above.
@@ -109,9 +113,11 @@ class CalculationsController < ApplicationController
       @median = @numbers[@count/2]
     end
     
+
     @sum = @numbers.sum
 
     @mean = @sum/@count
+
 
     @demeaned = @numbers.map { |i| i - @mean }
     @squared = @demeaned.map { |i| i**2}
@@ -124,6 +130,7 @@ class CalculationsController < ApplicationController
     
    
     @mode = @numbers[@counts.index(@counts.sort[@counts.count - 1])]
+
 
     # ================================================================================
     # Your code goes above.
